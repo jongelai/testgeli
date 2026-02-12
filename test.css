@@ -70,3 +70,21 @@ body {
 #quiz-container {
     margin-top: 10px;
 }
+/* Color cuando aciertas */
+.correcto {
+    background-color: #2ecc71 !important;
+    color: white !important;
+    border-color: #27ae60 !important;
+}
+
+/* Color cuando fallas */
+.incorrecto {
+    background-color: #e74c3c !important;
+    color: white !important;
+    border-color: #c0392b !important;
+}
+
+/* Efecto de escala al pulsar */
+.opcion-btn:active {
+    transform: scale(0.98);
+}

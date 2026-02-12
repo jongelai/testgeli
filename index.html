@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Roma y Grecia</title>
+    <title>Examen Roma y Grecia - J.Geli</title>
     <link rel="stylesheet" href="test.css">
 </head>
 <body>
@@ -13,9 +13,14 @@
     </header>
 
     <div id="quiz-container">
-        <p class="subtitulo">Examen Nivel 2º ESO</p>
+        <div id="barra-progreso-fondo" style="background: #eee; height: 10px; border-radius: 5px; margin-bottom: 20px; overflow: hidden;">
+            <div id="barra-progreso-relleno" style="background: #3498db; height: 100%; width: 0%; transition: width 0.4s ease;"></div>
+        </div>
+
+        <p class="subtitulo">Nivel 2º ESO - Evaluación Interactiva</p>
         
         <div id="pregunta-texto">Cargando pregunta...</div>
+        
         <div id="opciones-container"></div>
         
         <div id="marcador">
