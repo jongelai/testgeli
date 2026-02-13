@@ -3,29 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen Roma y Grecia - J.Geli</title>
+    <title>Academia J.Geli - Tests Interactivos</title>
     <link rel="stylesheet" href="test.css">
 </head>
 <body>
 
     <header class="main-header">
-        <h1>Test Historia: Grecia y Roma</h1>
+        <h1>Test Varios 2026</h1>
     </header>
 
     <div id="quiz-container">
-        <div id="barra-progreso-fondo" style="background: #eee; height: 10px; border-radius: 5px; margin-bottom: 20px; overflow: hidden;">
-            <div id="barra-progreso-relleno" style="background: #3498db; height: 100%; width: 0%; transition: width 0.4s ease;"></div>
+        
+        <div id="menu-inicio">
+            <p class="subtitulo">Selecciona un test para comenzar:</p>
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+                <button onclick="window.location.href='index.html?test=roma'" class="opcion-btn">🏛️ Historia: Grecia y Roma</button>
+                <button onclick="window.location.href='index.html?test=filosofos_1'" class="opcion-btn">🌍 Filosofia Basica</button>
+                <button onclick="window.location.href='index.html?test=crazy'" class="opcion-btn">🌍 Varios:general</button>
+                <button onclick="window.location.href='index.html?test=matematicas_1'" class="opcion-btn">🌍 Matematicas faciles
+                    
+                </button>
+                </div>
         </div>
 
-        <p class="subtitulo">Nivel 2º ESO - Evaluación Interactiva</p>
-        
-        <div id="pregunta-texto">Cargando pregunta...</div>
-        
-        <div id="opciones-container"></div>
-        
-        <div id="marcador">
-            <span id="progreso">Pregunta 1 de 20</span>
-            <span id="puntos">Aciertos: 0</span>
+        <div id="pantalla-test" style="display: none;">
+            <div id="barra-progreso-fondo" style="background: #eee; height: 10px; border-radius: 5px; margin-bottom: 20px; overflow: hidden;">
+                <div id="barra-progreso-relleno" style="background: #3498db; height: 100%; width: 0%; transition: width 0.4s ease;"></div>
+            </div>
+
+            <div id="pregunta-texto">Cargando pregunta...</div>
+            <div id="opciones-container"></div>
+            
+            <div id="marcador">
+                <span id="progreso">Pregunta 1 de --</span>
+                <span id="puntos">Aciertos: 0</span>
+            </div>
         </div>
     </div>
 
@@ -34,6 +46,14 @@
     </footer>
 
     <script type="module" src="script.js"></script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('test')) {
+            document.getElementById('menu-inicio').style.display = 'none';
+            document.getElementById('pantalla-test').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
