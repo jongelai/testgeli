@@ -1,5 +1,5 @@
 export const datosTest = {
-    titulo: "Test: Filósofos Clásicos de Grecia",
+    titulo: "🏛️ Filósofos Clásicos de Grecia",
     preguntas: [
         { q: "¿Qué filósofo es famoso por su método de preguntas llamado 'Mayéutica'?", a: ["Platón", "Sócrates", "Aristóteles"], correcta: 1 },
         { q: "¿Quién escribió 'La República' y fundó 'La Academia'?", a: ["Platón", "Pitágoras", "Heráclito"], correcta: 0 },

@@ -12,6 +12,7 @@ const txtPuntos = document.getElementById("puntos");
 const urlParams = new URLSearchParams(window.location.search);
 const nombreTest = urlParams.get('test'); 
 
+// --- INICIO: Lógica para cargar Test o generar Menú ---
 if (nombreTest) {
     import(`./data/${nombreTest}.js`)
         .then(modulo => {
@@ -23,10 +24,38 @@ if (nombreTest) {
             txtPregunta.innerText = "Error al cargar el test.";
             console.error(err);
         });
+} else {
+    generarMenu();
 }
 
+async function generarMenu() {
+    const { listaTests } = await import('./data/lista_tests.js');
+    
+    // Apuntamos al contenedor de botones del menú
+    const contenedorMenu = document.getElementById("menu-botones");
+    if (!contenedorMenu) return;
+
+    contenedorMenu.innerHTML = ""; 
+
+    for (const nombre of listaTests) {
+        try {
+            const modulo = await import(`./data/${nombre}.js`);
+            const btn = document.createElement("button");
+            
+            // Usamos solo el título
+            btn.innerText = modulo.datosTest.titulo; 
+            btn.classList.add("opcion-btn");
+            btn.onclick = () => window.location.href = `index.html?test=${nombre}`;
+            
+            contenedorMenu.appendChild(btn);
+        } catch (error) {
+            console.error("No se pudo cargar el título de:", nombre);
+        }
+    }
+}
+// --- FIN DE LÓGICA DE MENÚ ---
+
 function cargarPregunta() {
-    // IMPORTANTE: Limpiar el contenedor antes de generar nuevos botones
     contenedorOpciones.innerHTML = "";
     
     if (indice >= bancoPreguntas.length) {
@@ -45,7 +74,6 @@ function cargarPregunta() {
         const btn = document.createElement("button");
         btn.innerText = opcion;
         btn.classList.add("opcion-btn");
-        // Usamos una función anónima para pasar el evento y el índice correctamente
         btn.onclick = (e) => validar(i, e); 
         contenedorOpciones.appendChild(btn);
     });
@@ -53,30 +81,35 @@ function cargarPregunta() {
 
 function validar(seleccion, evento) {
     const pActual = bancoPreguntas[indice];
-    const botones = document.querySelectorAll(".opcion-btn");
+    const botones = document.querySelectorAll("#opciones-container .opcion-btn");
     
-    // Bloqueo inmediato de clics
+    // Bloqueamos clics adicionales
     botones.forEach(btn => btn.style.pointerEvents = "none");
 
     const esCorrecta = (seleccion === pActual.correcta);
+    let tiempoEspera = 1000; // 1 segundo si acierta
 
     if (esCorrecta) {
         aciertos++;
-        // Usamos directamente el target del evento para asegurar que pintamos el botón clickeado
         evento.target.classList.add("correcto");
     } else {
+        // El usuario falló
+        tiempoEspera = 2000; // 2 segundos si falla para que le dé tiempo a ver la buena
+        
+        // Marcamos la elegida como incorrecta
         evento.target.classList.add("incorrecto");
-        // Mostramos la correcta resaltándola
-        botones[pActual.correcta].classList.add("correcto");
+        
+        // Buscamos el botón correcto, le ponemos color verde y lo agrandamos
+        const botonCorrecto = botones[pActual.correcta];
+        botonCorrecto.classList.add("correcto", "resaltar-correcta");
     }
 
     if (txtPuntos) txtPuntos.innerText = `Aciertos: ${aciertos}`;
 
-    // Espera un segundo y pasa a la siguiente
     setTimeout(() => {
         indice++;
         cargarPregunta();
-    }, 1000);
+    }, tiempoEspera);
 }
 
 function mostrarResultadoFinal() {

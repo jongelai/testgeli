@@ -150,3 +150,42 @@ body {
         font-size: 1.1rem;
     }
 }
+/* Efecto de pulso para la respuesta correcta */
+.efecto-acierto {
+    animation: pulso-acierto 0.5s ease;
+}
+
+@keyframes pulso-acierto {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Opcional: un toque de vibración para la incorrecta */
+.incorrecto {
+    animation: vibrar 0.3s linear;
+}
+
+@keyframes vibrar {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+/* Efecto para agrandar la respuesta correcta al fallar */
+.resaltar-correcta {
+    transform: scale(1.10);
+    /*Aumentaeltamañoun15%*/z-index: 10;
+    /*Aseguraqueseveaporencimadelosdemás*/box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+    /*Brilloverdesuave*/transition: transform 0.3s ease;
+    /*Animaciónsuave*/font-weight: bold;
+    -webkit-transform: scale(1.10);
+    -moz-transform: scale(1.10);
+    -ms-transform: scale(1.10);
+    -o-transform: scale(1.10);
+}
+
+/* Efecto opcional para que la respuesta que el usuario marcó mal se vea más pequeña */
+.incorrecto {
+    transform: scale(0.95);
+    opacity: 0.8;
+}

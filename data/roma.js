@@ -1,5 +1,5 @@
 export const datosTest = {
-    titulo: "Test Historia: Grecia y Roma",
+    titulo: "🏛️ Historia: Grecia y Roma",
     preguntas: [
         { q: "¿En qué ciudad-estado griega nació el concepto de 'Democracia'?", a: ["Esparta", "Atenas", "Tebas"], correcta: 1 },
         { q: "¿Cómo se llamaba la formación militar básica de los ciudadanos griegos?", a: ["Legión", "Falange", "Manípulo"], correcta: 1 },
